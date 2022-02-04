@@ -1,0 +1,52 @@
+#include <ctype.h>
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
+
+int main(void)
+{
+    //My variables
+    string word = get_string("Insert the text ");
+    int counter;
+    
+    int words =1;
+    int letters=0;
+    int sentences=0;
+    //int l
+    for (counter =0;word[counter]!= 0;counter++)
+    {
+        if(word[counter]==' ') //we use the number of spaces to calculate the words
+        {
+            words++;
+        }
+        if(word[counter]>='A' &&word[counter]<='z')
+        {
+            letters++;
+        }
+        if(word[counter]=='.' || word[counter]=='?' || word[counter]=='!')
+        sentences++;
+    }
+    float L =letters*100.0/words;
+    float S =sentences*100.0/words;
+    float index =0.0588 * L - 0.296 * S - 15.8;
+    
+    //Rounding
+    index *= 10;
+    index += 5;
+    index=(int)index;
+    index /= 10;
+    if (index<=1)
+    {
+        printf("before grade1 \n");
+    }
+    if(index>16)
+    {
+        printf("16+ \n");
+    }
+    else
+    {
+    printf("Grade%i\n",(int)index);
+    }
+    
+}
